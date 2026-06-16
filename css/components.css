@@ -10,70 +10,178 @@
     border-bottom: 1px solid #e2e8f0;
 }
 
-.navbar nav a {
+.logo-container {
+    display: flex;
+    align-items: center;
+
+}
+
+.logo-img {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* LINKS DO MENU */
+#main-nav {
+    display: flex;
+    gap: 24px;
+}
+
+#main-nav a {
     text-decoration: none;
+    color: #334155;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding-bottom: 4px;
+}
+
+#main-nav a.active {
+    color: #2D6A4F;
+    border-bottom: 3px solid #2D6A4F;
+}
+
+/* ELEMENTOS DA DIREITA (IGUAL À FOTO) */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Círculo cinza ao redor da lupa */
+.search-container-bg {
+    background-color: #F1F5F9;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-search {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+/* Círculo cinza maior ao redor do seletor de país */
+.country-selector-wrapper {
+    background-color: #F1F5F9;
+    width: 54px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Pílula branca interna que segura a bandeira e a seta */
+.country-selector {
+    background-color: #ffffff;
+    padding: 3px 6px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.flag-icon {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
+
+/* Seta cinza compacta e apontando para baixo */
+.arrow-down {
+    font-size: 0.55rem;
     color: #64748b;
-    margin-left: 20px;
-    font-weight: 500;
-}
-
-.navbar nav a.active {
-    color: var(--verde-escuro, #2D6A4F);
-    border-bottom: 2px solid var(--verde-escuro, #2D6A4F);
-}
-
-.navbar .logo {
-    font-size: 1.3rem;
+    transform: rotate(180deg); /* Gira o caractere para virar uma seta perfeita para baixo */
+    display: inline-block;
     font-weight: bold;
-    color: var(--verde-escuro, #2D6A4F);
-}
-
-.navbar .logo span {
-    color: var(--ouro-cup, #DDB86A);
 }
 
 /* =========================================================
-   2. HERO BANNER PRINCIPAL
+   2. HERO BANNER PRINCIPAL COM IMAGEM DE FUNDO
    ========================================================= */
 .hero {
-    background: linear-gradient(135deg, #ffffff 0%, #edf5f1 100%);
+    /* Carrega a nova imagem e adiciona um degradê sutil na esquerda para destacar o texto */
+    background: linear-gradient(90deg, rgba(255,255,255,0.95) 30%, rgba(255,255,255,0.2) 70%), 
+                url('../assets/hero-bg.png') no-repeat center center;
+    background-size: cover; /* Garante que a imagem preencha todo o espaço sem distorcer */
     margin: 20px 10%;
-    padding: 40px;
+    padding: 60px 50px; /* Aumentou o espaçamento interno para dar imponência */
     border-radius: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border: 1px solid #e2ece7;
+    min-height: 280px; /* Define uma altura mínima ideal para valorizar a imagem */
+}
+
+.hero-content {
+    max-width: 50%; /* Garante que o texto ocupe apenas a metade esquerda do banner */
+    z-index: 2;
 }
 
 .hero h1 {
-    font-size: 2.5rem;
-    color: var(--verde-escuro, #2D6A4F);
-    line-height: 1.2;
+    font-size: 3rem;
+    color: #0F2942; /* Azul escuro idêntico ao da imagem */
+    line-height: 1.1;
+    font-weight: 800;
 }
 
 .hero h1 .highlight {
-    color: var(--ouro-cup, #DDB86A);
+    color: #69B37E; /* Verde médio suave da imagem de referência */
 }
 
 .hero p {
-    color: #4a5d4e;
-    margin: 15px 0 25px 0;
+    color: #334155;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 20px 0 30px 0;
 }
 
 .btn-live {
-    background-color: var(--verde-escuro, #2D6A4F);
-    color: white;
+    background: linear-gradient(135deg, #448E64 0%, #2D6A4F 100%); /* Degradê sutil em verde */
+    color: #ffffff;
     border: none;
-    padding: 12px 24px;
-    font-weight: bold;
-    border-radius: 12px;
+    padding: 14px 28px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 20px; /* Bordas bem arredondadas igual ao modelo */
+    display: inline-flex;
+    align-items: center;
+    gap: 15px; /* Espaço perfeito entre o texto e o ícone de Play */
     cursor: pointer;
-    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(45, 106, 79, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-live:hover {
-    background-color: #1e4634;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(45, 106, 79, 0.3);
+}
+
+.play-icon {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff; /* Círculo branco ao redor do triângulo */
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem; /* Deixa o triângulo interno pequeno e delicado */
+    padding-left: 2px; /* Ajuste milimétrico para centralizar o triângulo deitado */
 }
 
 /* =========================================================
