@@ -1,6 +1,6 @@
 // js/api.js
 const API_URL = "https://worldcup26.ir";
-const TOKEN = "SEU_TOKEN_AQUI"; // Certifique-se de colar aqui o Token JWT que seu grupo copiou do Insomnia/Postman
+const TOKEN = "SEU_TOKEN_AQUI"; // Cole aqui o token JWT gerado pelo grupo no Insomnia/Postman
 
 async function obterDadosDaCopa(endpoint) {
     try {
@@ -18,7 +18,7 @@ async function obterDadosDaCopa(endpoint) {
 
         return await resposta.json();
     } catch (erro) {
-        console.error("Erro na comunicação com a API:", erro);
+        console.error("Erro de comunicação com o servidor:", erro);
         throw erro;
     }
 }

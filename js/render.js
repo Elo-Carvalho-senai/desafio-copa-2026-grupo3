@@ -1,22 +1,26 @@
 // js/render.js
+
 function renderizarPartidas(partidas) {
     const container = document.getElementById("jogos-container");
-    container.innerHTML = ""; 
+    if (!container) return;
+    
+    container.innerHTML = ""; // Limpa a mensagem de carregamento
 
     if (!partidas || partidas.length === 0) {
         container.innerHTML = "<p>Nenhuma partida encontrada no momento.</p>";
         return;
     }
 
+    // Renderiza as 3 primeiras partidas da API para compor a interface da Home
     partidas.slice(0, 3).forEach(jogo => {
         const card = document.createElement("div");
-        card.className = "card card-jogo"; // Usa suas classes originais dos cards
+        card.className = "card card-jogo";
         
         const flagHome = jogo.home_team_id ? jogo.home_team_id.toLowerCase() : "un";
         const flagAway = jogo.away_team_id ? jogo.away_team_id.toLowerCase() : "un";
 
         card.innerHTML = `
-            <span class="grupo-label">GRUPO ${jogo.id}</span>
+            <span class="grupo-label">PARTIDA ${jogo.id}</span>
             <div class="placar-container">
                 <div class="time-linha">
                     <img src="https://flagcdn.com{flagHome}.png" class="flag-small" alt="">
@@ -34,4 +38,16 @@ function renderizarPartidas(partidas) {
         `;
         container.appendChild(card);
     });
+}
+
+function exibirMensagemErroUI(mensagem) {
+    const container = document.getElementById("jogos-container");
+    if (!container) return;
+    
+    container.innerHTML = `
+        <div class="erro-box" style="padding: 20px; border: 1px solid #fca5a5; background-color: #fef2f2; border-radius: 12px; text-align: center; color: #991b1b; width: 100%;">
+            <p style="margin-bottom: 12px; font-weight: 500;">⚠️ ${mensagem}</p>
+            <button onclick="inicializarPainel()" style="background-color: #991b1b; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold;">Tentar Novamente</button>
+        </div>
+    `;
 }
