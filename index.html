@@ -67,19 +67,20 @@
             <!-- Card Próximo Jogo (Com o fundo verde claro da foto) -->
             <div class="card widget-proximo" id="proximo-jogo-container">
                 <span class="badge-title">🗓️ PRÓXIMO JOGO</span>
-                <div class="confronto-layout">
-                    <img src="https://flagcdn.com" class="flag-medium" alt="Brasil">
-                    <span class="texto-confronto">
-                        Brasil <span class="vs">x</span> Haiti
+                <div class="confronto-layout-novo">
+                    <!-- O JS vai carregar as imagens locais certas aqui, mas deixamos os caminhos corrigidos de exemplo -->
+                    <img src="assets/flags/brasil.png" class="flag-medium" alt="">
+                    <span class="texto-confronto-novo">
+                        Brasil x Haiti
                     </span>
-                    <img src="https://flagcdn.com" class="flag-medium" alt="Colômbia">
+                    <img src="assets/flags/haiti.png" class="flag-medium" alt="">
                 </div>
-                <div class="info-rodape-card">
-                    <div class="info-partida">
-                        <p class="data-hora">19 JUN • 21:30</p>
-                        <p class="estadio">SoFi Stadium - Los Angeles</p>
+                <div class="info-rodape-card-novo">
+                    <div class="info-partida-nova">
+                        <p class="data-hora-nova">19 JUN • 21:30</p>
+                        <p class="estadio-novo">SoFi Stadium - Los Angeles</p>
                     </div>
-                    <button class="btn-seta">➔</button>
+                    <button class="btn-seta-nova">➔</button>
                 </div>
             </div>
 
@@ -188,6 +189,48 @@
 
         </section>
     </main>
+
+    <!-- =========================================================
+     RODAPÉ DA PÁGINA (FOOTER CORPORATIVO) 
+     ========================================================= -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            
+            <!-- Coluna 1: Sobre o Projeto -->
+            <div class="footer-col">
+                <h4>GOSSIP <span>CUP</span></h4>
+                <p>Portal acadêmico focado em cobertura, estatísticas e acompanhamento em tempo real da Copa do Mundo FIFA 2026.</p>
+            </div>
+
+            <!-- Coluna 2: Informações Acadêmicas -->
+            <div class="footer-col">
+                <h5>Informações Acadêmicas</h5>
+                <ul>
+                    <li><strong>Matéria:</strong> Desenvolvimento Front-end </li>
+                    <li><strong>Professor:</strong> Wagner Sabor</li>
+                    <li><strong>Instituição:</strong> Curso Técnico de Desenvolvimento de Sistemas - SENAI</li>
+                </ul>
+            </div>
+
+            <!-- Coluna 3: Grupo e Repositório -->
+            <div class="footer-col">
+                <h5>Desenvolvimento</h5>
+                <p><strong>Grupo 3:</strong></p>
+                <p class="nomes-lista">Isadora Aquino, Maria Eloisa, Maria Fernanda, Raissa Fernandes</p>
+                <a href="https://github.com" target="_blank" rel="noopener" class="btn-git-footer">
+                    📦 Acessar Repositório Git ➔
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Barra de Direitos Autorais Inferior -->
+        <div class="footer-bottom">
+            <p>© 2026 Gossip Cup. Todos os direitos reservados. Projeto sem fins lucrativos.</p>
+        </div>
+    </footer>
+
+
 
     <!-- ARQUIVOS DE LÓGICA JAVASCRIPT (Mantidos perfeitamente isolados) -->
     <script src="js/api.js"></script>

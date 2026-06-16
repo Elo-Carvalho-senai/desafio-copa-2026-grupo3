@@ -219,79 +219,102 @@
     gap: 6px;
 }
 
-/* =========================================================
-   4. CARD 1: PRÓXIMO JOGO (ESTILO VERDE CLARO COPA)
-   ========================================================= */
+/* ==========================================================================
+   4. CARD 1: PRÓXIMO JOGO (ESTILO CORPORATIVO FIFA — VERDE CLARO)
+   ========================================================================== */
+
+/* Caixa principal do card com a cor de fundo verde-clara e recuos perfeitos */
 .widgets-grid .widget-proximo {
-    background-color: #EEF5F1 !important; /* Fundo verde claro oficial */
+    background-color: #EEF5F1 !important; /* Verde pastel idêntico ao modelo */
     border: 1px solid #DCE8E1 !important;
-}
-
-.confronto-layout {
+    border-radius: 20px !important;       /* Cantos arredondados suavizados */
+    padding: 24px 30px !important;        /* Aumentou o espaço para afastar os cantos */
+    height: 180px; 
     display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 5px;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
 }
 
-.texto-confronto {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #1E4634;
+/* Força os elementos da linha (Bandeira - Texto - Bandeira) a ficarem na horizontal */
+.confronto-layout-novo {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important; /* Cola o bloco começando da esquerda */
+    gap: 16px !important;                   /* Espaçamento perfeito entre imagens e letras */
+    margin: 18px 0 12px 0 !important;       /* Centralizou a linha verticalmente no meio do card */
+    width: 100% !important;
 }
 
-.texto-confronto .vs {
-    font-weight: 400;
-    margin: 0 4px;
+/* 🧙‍♂️ CALIBRAÇÃO CORPORATIVA DA FONTE (IGUAL À REFERÊNCIA) */
+.texto-confronto-novo {
+    font-family: 'Poppins', 'Segoe UI', sans-serif !important;
+    font-size: 1.65rem !important;        /* Aumentou o tamanho para dar imponência */
+    font-weight: 700 !important;          /* Força as letras a ficarem bem grossas/Bold */
+    color: #0F4C3A !important;             /* O verde-escuro exato da imagem de referência */
+    letter-spacing: -0.5px !important;    /* Junta as letras sutilmente como na foto */
+    white-space: nowrap;
 }
 
-/* Correção definitiva do tamanho das duas bandeiras superiores */
-.flag-medium {
-    width: 28px !important;
-    height: 28px !important;
+/* Corrige o tamanho e força o círculo perfeito nas bandeiras */
+.widgets-grid .widget-proximo .flag-medium {
+    width: 32px !important;               /* Aumentou o tamanho para equilibrar com o texto maior */
+    height: 32px !important;
     border-radius: 50% !important;
     object-fit: cover !important;
     display: inline-block !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
 }
 
-.info-rodape-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+/* Alinha o bloco de informações com o botão de seta na mesma linha horizontal */
+.info-rodape-card-novo {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
     width: 100%;
 }
 
-.info-partida .data-hora {
-    font-size: 0.85rem;
-    color: #4A5D53;
-    font-weight: 600;
+.info-partida-nova p {
+    margin: 0 !important; /* Zera margens para os textos ficarem bem compactos */
 }
 
-.info-partida .estadio {
-    font-size: 0.8rem;
-    color: #7A8D83;
+.data-hora-nova {
+    font-family: 'Inter', 'Segoe UI', sans-serif !important;
+    font-size: 0.95rem !important;
+    color: #4A5D53 !important;            /* Cinza-esverdeado corporativo */
+    font-weight: 600 !important;
 }
 
-.btn-seta {
-    background-color: #ffffff;
-    color: #6FAF8F;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.9rem;
-    box-shadow: 0 2px 6px rgba(45, 106, 79, 0.1);
+.estadio-novo {
+    font-family: 'Inter', 'Segoe UI', sans-serif !important;
+    font-size: 0.85rem !important;
+    color: #7A8D83 !important;
+    margin-top: 4px !important;           /* Separação sutil do estádio */
+}
+
+/* Cria o botão de seta redondo e branco da imagem de referência */
+.btn-seta-nova {
+    background-color: #ffffff !important;
+    color: #6FAF8F !important;            /* O tom de verde médio da seta */
+    border: none !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: bold !important;
+    font-size: 0.9rem !important;
+    box-shadow: 0 2px 6px rgba(45, 106, 79, 0.1) !important;
     cursor: pointer;
     transition: transform 0.2s;
 }
 
-.btn-seta:hover {
-    transform: scale(1.1);
+.btn-seta-nova:hover {
+    transform: scale(1.08); /* Efeito suave e elegante de foco */
 }
 
 /* =========================================================
@@ -483,4 +506,127 @@ th {
 .tempo-noticia {
     font-size: 0.8rem;
     color: #94a3b8;
+}
+
+/* =========================================================
+   9. ESTILIZAÇÃO DO RODAPÉ (FOOTER PREMIUM E STICKY)
+   ========================================================= */
+
+/* Força o HTML e o BODY a ocuparem toda a altura da tela para o rodapé colar embaixo */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-container {
+    flex: 1 0 auto; /* Faz o conteúdo principal empurrar o rodapé para a base */
+}
+
+/* O CORPO DO RODAPÉ (Tons escuros oficiais da identidade) */
+.site-footer {
+    background-color: #0F2942; /* Azul escuro corporativo idêntico ao título do Hero */
+    color: #cbd5e1;
+    padding: 40px 10% 20px 10%;
+    margin-top: 60px;
+    width: 100%;
+    flex-shrink: 0; /* Impede o rodapé de encolher */
+    border-top: 4px solid #2D6A4F; /* Detalhe com a linha verde da marca no topo */
+    font-family: 'Inter', sans-serif;
+}
+
+/* Estruturação das 3 colunas lado a lado */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Linha divisória sutil */
+}
+
+.footer-col h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.footer-col h4 span {
+    color: #DDB86A; /* Dourado Cup */
+}
+
+.footer-col h5 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-col p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #94a3b8;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    color: #cbd5e1;
+}
+
+.footer-col ul li strong {
+    color: #69B37E; /* Verde suave nos títulos acadêmicos */
+}
+
+.nomes-lista {
+    margin-bottom: 15px !important;
+    font-style: italic;
+}
+
+/* Botão elegante para o GitHub do grupo */
+.btn-git-footer {
+    display: inline-block;
+    background-color: #2D6A4F; /* Verde oficial */
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.btn-git-footer:hover {
+    background-color: #1E4634;
+}
+
+/* Barra inferior de direitos autorais */
+.footer-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+/* Responsividade: vira uma coluna única se aberto no celular */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .footer-col {
+        text-align: center;
+    }
+    .btn-git-footer {
+        width: 100%;
+        text-align: center;
+    }
 }
