@@ -55,44 +55,44 @@
         <!-- GRID DE CARDS DE RESUMO (WIDGETS SUPERIORES) -->
         <section class="widgets-grid" aria-label="Resumo do dia">
             
-            <!-- Card Próximo Jogo -->
-            <div class="card widget-proximo">
-                <span class="badge-title">🗓️ Próximo Jogo</span>
-                <div class="confronto-flex">
-                    <div class="time-bloco">
-                        <!-- Alterado para o link da internet público -->
-                        <img src="https://flagcdn.com" alt="Brasil" class="flag-medium">
-                        <span class="time-nome">Brasil</span>
-                    </div>
-                    <span class="vs">x</span>
-                    <div class="time-bloco">
-                        <!-- Alterado para o link da internet público -->
-                        <img src="https://flagcdn.com" alt="Colômbia" class="flag-medium">
-                        <span class="time-nome">Colômbia</span>
-                    </div>
+            <!-- Card Próximo Jogo (Com o fundo verde claro da foto) -->
+            <div class="card widget-proximo" id="proximo-jogo-container">
+                <span class="badge-title">🗓️ PRÓXIMO JOGO</span>
+                <div class="confronto-layout">
+                    <img src="https://flagcdn.com" class="flag-medium" alt="Brasil">
+                    <span class="texto-confronto">
+                        Brasil <span class="vs">x</span> Colômbia
+                    </span>
+                    <img src="https://flagcdn.com" class="flag-medium" alt="Colômbia">
                 </div>
-                <div class="info-partida">
-                    <p class="data-hora">20 JUN • 22:00</p>
-                    <p class="estadio">SoFi Stadium - Los Angeles</p>
+                <div class="info-rodape-card">
+                    <div class="info-partida">
+                        <p class="data-hora">20 JUN • 22:00</p>
+                        <p class="estadio">SoFi Stadium - Los Angeles</p>
+                    </div>
+                    <button class="btn-seta">➔</button>
                 </div>
             </div>
 
-            <!-- Card Jogos de Hoje -->
-            <div class="card widget-info">
-                <span class="badge-title">⚽ Jogos Hoje</span>
+            <!-- Card Jogos de Hoje (Com marca d'água de campo de futebol) -->
+            <div class="card widget-info card-jogos-hoje">
+                <span class="badge-title">⚽ JOGOS HOJE</span>
                 <div class="widget-corpo">
                     <span class="numero-grande" id="qtd-jogos-hoje">--</span>
                     <p class="subtexto">partidas</p>
                 </div>
+                <!-- SVG embutido para criar o desenho sutil do campo ao fundo sem baixar imagem -->
+                <svg class="bg-pattern" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M10,10 L90,10 L90,90 L10,90 Z M10,50 L90,50 M50,10 L50,90" fill="none" stroke="#2D6A4F" stroke-width="0.5" opacity="0.05"/><circle cx="50" cy="50" r="15" fill="none" stroke="#2D6A4F" stroke-width="0.5" opacity="0.05"/></svg>
             </div>
 
-            <!-- Card Gols Marcados -->
-            <div class="card widget-info">
-                <span class="badge-title">📊 Gols Marcados</span>
+            <!-- Card Gols Marcados (Com marca d'água do jogador) -->
+            <div class="card widget-info card-gols-marcados">
+                <span class="badge-title">🥅 GOLS MARCADOS</span>
                 <div class="widget-corpo">
                     <span class="numero-grande" id="total-gols">--</span>
                     <p class="subtexto">gols</p>
                 </div>
+                <img src="assets/jogador.webp" class="jogador-bg" alt="" aria-hidden="true">
             </div>
         </section>
 
