@@ -225,7 +225,7 @@
 
 /* Caixa principal do card com a cor de fundo verde-clara e recuos perfeitos */
 .widgets-grid .widget-proximo {
-    background-color: #EEF5F1 !important; /* Verde pastel idêntico ao modelo */
+    background-color: #ebf3ea !important; /* Verde pastel idêntico ao modelo */
     border: 1px solid #DCE8E1 !important;
     border-radius: 20px !important;       /* Cantos arredondados suavizados */
     padding: 24px 30px !important;        /* Aumentou o espaço para afastar os cantos */
@@ -256,6 +256,23 @@
     color: #0F4C3A !important;             /* O verde-escuro exato da imagem de referência */
     letter-spacing: -0.5px !important;    /* Junta as letras sutilmente como na foto */
     white-space: nowrap;
+}
+
+.widgets-grid .widget-proximo .badge-title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important; /* Espaçamento ideal entre a imagem e a palavra */
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #4A5D53;
+    text-transform: uppercase;
+}
+
+.card-title-icon {
+    width: 40px !important;  /* Tamanho pequeno e elegante de ícone */
+    height: 40px !important;
+    object-fit: contain;
+    display: inline-block;
 }
 
 /* Corrige o tamanho e força o círculo perfeito nas bandeiras */
@@ -321,12 +338,35 @@
    5. CARDS 2 E 3: TEXTOS, NÚMEROS E CORES DE FUNDO
    ========================================================= */
 .card-jogos-hoje {
-    background-color: #FFFDF6 !important; /* Amarelo bem suave */
+    /* Combina a cor amarela/bege de fundo com a imagem do campo recortada e posicionada no canto */
+    background: #FFFDF6 url('../assets/quadra.png') no-repeat bottom right !important;
+    background-size: 110px auto !important; /* Controla o tamanho exato da marca d'água */
     border: 1px solid #F5EFE0 !important;
+    position: relative;
+    overflow: hidden; /* Garante que o fundo respeite as bordas arredondadas do card */
+}
+
+.card-jogos-hoje .badge-title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important; /* Espaçamento ideal idêntico ao do Card 1 */
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b; /* Mantém o cinza padrão dos títulos secundários */
+    text-transform: uppercase;
+}
+
+.card-jogos-hoje .badge-title .card-title-icon {
+    width: 20px !important;   /* Tamanho exato das letras do título */
+    height: 20px !important;  /* Mantém a proporção idêntica de largura e altura */
+    object-fit: contain !important;
+    display: inline-block !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .card-gols-marcados {
-    background-color: #F4F7FA !important; /* Azul acinzentado da foto */
+    background-color: #edf1f4!important; /* Azul acinzentado da foto */
     border: 1px solid #E6ECF2 !important;
 }
 
