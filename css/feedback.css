@@ -1,0 +1,38 @@
+/* FEEDBACKS E TRATAMENTOS DE ESTADO */
+
+/* Estado de Loading Fluido */
+.loading-placeholder {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: var(--verde-claro);
+    font-weight: 500;
+    font-size: 1rem;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px dashed var(--verde-claro);
+    animation: pulsarSuave 1.5s infinite ease-in-out;
+}
+
+@keyframes pulsarSuave {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* Caixa de Erro Amigável (Não quebra o layout) */
+.erro-box {
+    grid-column: 1 / -1;
+    animation: surgimentoSuave 0.3s ease-out;
+}
+
+@keyframes surgimentoSuave {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

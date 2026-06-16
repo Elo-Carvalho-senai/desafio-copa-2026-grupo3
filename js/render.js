@@ -1,21 +1,20 @@
 // js/render.js
 
-// Desenha a lista de partidas na tela
 function renderizarPartidas(partidas) {
     const container = document.getElementById("jogos-container");
-    container.innerHTML = ""; // Limpa a mensagem de carregando
+    container.innerHTML = ""; // Limpa a mensagem padrão de loading
 
     if (!partidas || partidas.length === 0) {
-        container.innerHTML = "<p>Nenhuma partida encontrada no momento.</p>";
+        container.innerHTML = "<div class='loading-placeholder'>Nenhum jogo encontrado na API para exibição.</div>";
         return;
     }
 
-    // Pega as primeiras 3 partidas para moldar o layout da imagem
+    // Filtra e pega os primeiros 3 jogos retornados para preencher o grid visual do layout
     partidas.slice(0, 3).forEach(jogo => {
         const card = document.createElement("div");
         card.className = "card card-jogo";
         
-        // Pega os IDs dos times para gerar o link da bandeira (ex: "br", "fr")
+        // Se a API não trouxer um ID de time válido, define "un" (bandeira das Nações Unidas) como segurança
         const flagHome = jogo.home_team_id ? jogo.home_team_id.toLowerCase() : "un";
         const flagAway = jogo.away_team_id ? jogo.away_team_id.toLowerCase() : "un";
 
@@ -40,13 +39,12 @@ function renderizarPartidas(partidas) {
     });
 }
 
-// Mostra uma mensagem amigável na tela se a API cair
 function exibirMensagemErroUI(mensagem) {
     const container = document.getElementById("jogos-container");
     container.innerHTML = `
-        <div class="erro-box">
-            <p>⚠️ ${mensagem}</p>
-            <button onclick="inicializarPainel()">Tentar Novamente</button>
+        <div class="erro-box" style="padding: 20px; border: 1px solid #fca5a5; background-color: #fef2f2; border-radius: 12px; text-align: center; color: #991b1b; width: 100%;">
+            <p style="margin-bottom: 12px; font-weight: 500;">⚠️ ${mensagem}</p>
+            <button onclick="inicializarPainel()" style="background-color: #991b1b; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold;">Tentar Novamente</button>
         </div>
     `;
 }

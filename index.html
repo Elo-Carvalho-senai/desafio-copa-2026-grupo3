@@ -14,25 +14,23 @@
     <!-- CABEÇALHO / NAVEGAÇÃO SUPERIOR -->
     <header class="navbar">
         <!-- Logo estilizada conforme o manual de marca -->
-        <div class="logo">
-            <img src="assets/logo.png" alt="Logo Gossip Cup" class="logo-img">
-            GOSSIP <span>CUP</span>
-        </div>
+        <div class="logo">GOSSIP <span>CUP</span></div>
         
         <!-- Menu de Navegação por abas/seções -->
         <nav id="main-nav">
-            <a href="#inicio" class="nav-link active" data-target="secao-inicio">Início</a>
-            <a href="#jogos" class="nav-link" data-target="secao-jogos-aba">Jogos</a>
-            <a href="#grupos" class="nav-link" data-target="secao-grupos-aba">Grupos</a>
-            <a href="#classificacao" class="nav-link" data-target="secao-classificacao-aba">Classificação</a>
-            <a href="#noticias" class="nav-link" data-target="secao-noticias-aba">Notícias</a>
-            <a href="#estatisticas" class="nav-link" data-target="secao-estatisticas-aba">Estatísticas</a>
+            <a href="#" class="nav-link active">Início</a>
+            <a href="#">Jogos</a>
+            <a href="#">Grupos</a>
+            <a href="#">Classificação</a>
+            <a href="#">Notícias</a>
+            <a href="#">Estatísticas</a>
         </nav>
         
         <!-- Elementos do canto direito (Busca e Seletor de Idioma/País) -->
         <div class="navbar-right">
             <button class="btn-search" aria-label="Buscar">🔍</button>
             <div class="country-selector">
+                <!-- Alterado para o link da internet público -->
                 <img src="https://flagcdn.com" alt="Brasil" class="flag-icon">
                 <span class="arrow-down">▼</span>
             </div>
@@ -40,18 +38,17 @@
     </header>
 
     <!-- CONTEÚDO PRINCIPAL DO DASHBOARD -->
-    <main class="dashboard-container" id="secao-inicio">
+    <main class="dashboard-container">
         
         <!-- BANNER PRINCIPAL (HERO) -->
         <section class="hero">
             <div class="hero-content">
                 <h1>COPA DO MUNDO<br><span class="highlight">FIFA 2026</span></h1>
                 <p>Acompanhe todos os jogos, resultados e notícias em tempo real.</p>
-                <button class="btn-live" id="btn-scroll-live">VER JOGOS AO VIVO ➔</button>
+                <button class="btn-live">VER JOGOS AO VIVO ➔</button>
             </div>
             <div class="hero-image-container">
-                <!-- Imagem recortada da taça oficial dourada sobre o fundo artístico -->
-                <img src="assets/taca-hero.png" alt="Taça da Copa do Mundo 2026" class="hero-taca">
+                <span style="font-size: 6rem;">🏆</span>
             </div>
         </section>
 
@@ -59,16 +56,18 @@
         <section class="widgets-grid" aria-label="Resumo do dia">
             
             <!-- Card Próximo Jogo -->
-            <div class="card widget-proximo" id="widget-next-match">
+            <div class="card widget-proximo">
                 <span class="badge-title">🗓️ Próximo Jogo</span>
                 <div class="confronto-flex">
                     <div class="time-bloco">
-                        <img src="https://flagcdn.com/br.png" alt="Brasil" class="flag-medium">
+                        <!-- Alterado para o link da internet público -->
+                        <img src="https://flagcdn.com" alt="Brasil" class="flag-medium">
                         <span class="time-nome">Brasil</span>
                     </div>
                     <span class="vs">x</span>
                     <div class="time-bloco">
-                        <img src="https://flagcdn.com/co.png" alt="Colômbia" class="flag-medium">
+                        <!-- Alterado para o link da internet público -->
+                        <img src="https://flagcdn.com" alt="Colômbia" class="flag-medium">
                         <span class="time-nome">Colômbia</span>
                     </div>
                 </div>
@@ -76,30 +75,23 @@
                     <p class="data-hora">20 JUN • 22:00</p>
                     <p class="estadio">SoFi Stadium - Los Angeles</p>
                 </div>
-                <span class="arrow-link">➔</span>
             </div>
 
             <!-- Card Jogos de Hoje -->
-            <div class="card widget-info" id="widget-today-games">
+            <div class="card widget-info">
                 <span class="badge-title">⚽ Jogos Hoje</span>
                 <div class="widget-corpo">
-                    <span class="numero-grande" id="qtd-jogos-hoje">6</span>
+                    <span class="numero-grande" id="qtd-jogos-hoje">--</span>
                     <p class="subtexto">partidas</p>
                 </div>
-                <!-- Mini padrão geométrico de fundo do card -->
-                <div class="card-pattern"></div>
             </div>
 
             <!-- Card Gols Marcados -->
-            <div class="card widget-info" id="widget-total-goals">
+            <div class="card widget-info">
                 <span class="badge-title">📊 Gols Marcados</span>
-                <div class="widget-corpo-flex">
-                    <div>
-                        <span class="numero-grande" id="total-gols">128</span>
-                        <p class="subtexto">gols</p>
-                    </div>
-                    <!-- Silhueta discreta de jogador correndo ao fundo -->
-                    <img src="assets/silhueta-jogador.png" alt="" class="silhouette-bg" aria-hidden="true">
+                <div class="widget-corpo">
+                    <span class="numero-grande" id="total-gols">--</span>
+                    <p class="subtexto">gols</p>
                 </div>
             </div>
         </section>
@@ -107,14 +99,13 @@
         <!-- SEÇÃO: JOGOS AO VIVO AGORA -->
         <section class="secao-jogos" aria-labelledby="titulo-ao-vivo">
             <div class="secao-header">
-                <h2 id="titulo-ao-vivo"><span class="dot-live"></span> AO VIVO AGORA</h2>
-                <a href="#jogos" class="ver-todos">Ver todos ➔</a>
+                <h2>🟢 AO VIVO AGORA</h2>
+                <a href="#" class="ver-todos">Ver todos ➔</a>
             </div>
             
-            <!-- Grid onde o JavaScript injetará os cards de jogos da API -->
-            <div class="jogos-live-grid" id="jogos-ao-vivo">
-                <!-- O estado de 'Carregando' ou os cards reais entram aqui via JS -->
-                <div class="loading-placeholder">Carregando partidas em tempo real...</div>
+            <!-- Grid onde o JavaScript injetará os cards dinâmicos vindos da API -->
+            <div class="jogos-live-grid" id="jogos-container">
+                <div class="loading-placeholder">Buscando partidas em tempo real na API...</div>
             </div>
         </section>
 
@@ -134,36 +125,28 @@
                                 <th class="text-center">V</th>
                                 <th class="text-center">E</th>
                                 <th class="text-center">D</th>
-                                <th class="text-center">GP</th>
-                                <th class="text-center">GC</th>
-                                <th class="text-center">SG</th>
                                 <th class="text-center">PTS</th>
                             </tr>
                         </thead>
                         <tbody id="tabela-grupo">
-                            <!-- Injetado dinamicamente via JS. Exemplo visual da imagem: -->
                             <tr>
                                 <td class="text-center bold">1</td>
-                                <td class="flex-align"><img src="assets/bandeiras/br.png" alt="" class="flag-small"> Brasil</td>
+                                <!-- Alterado para o link da internet público -->
+                                <td class="flex-align"><img src="https://flagcdn.com" alt="" class="flag-small"> Brasil</td>
                                 <td class="text-center">2</td>
                                 <td class="text-center">2</td>
                                 <td class="text-center">0</td>
                                 <td class="text-center">0</td>
-                                <td class="text-center">4</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center verde-texto">+4</td>
                                 <td class="text-center bold">6</td>
                             </tr>
                             <tr>
                                 <td class="text-center bold">2</td>
-                                <td class="flex-align"><img src="assets/bandeiras/pt.png" alt="" class="flag-small"> Portugal</td>
+                                <!-- Alterado para o link da internet público -->
+                                <td class="flex-align"><img src="https://flagcdn.com" alt="" class="flag-small"> Portugal</td>
                                 <td class="text-center">2</td>
                                 <td class="text-center">1</td>
                                 <td class="text-center">0</td>
                                 <td class="text-center">1</td>
-                                <td class="text-center">3</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center verde-texto">+2</td>
                                 <td class="text-center bold">3</td>
                             </tr>
                         </tbody>
@@ -175,14 +158,11 @@
             <div class="coluna-noticias">
                 <div class="secao-header">
                     <h2>ÚLTIMAS NOTÍCIAS</h2>
-                    <a href="#noticias" class="ver-todos">Ver todas</a>
+                    <a href="#" class="ver-todos">Ver todas</a>
                 </div>
-                
-                <div class="noticias-stack" id="feed-noticias">
+                <div class="noticias-stack">
                     <article class="card card-noticia">
-                        <div class="imagem-noticia-wrapper">
-                            <img src="assets/noticias/richarlison.png" alt="Jogador comemorando gol com a camisa do Brasil" class="img-noticia">
-                        </div>
+                        <div class="imagem-noticia-placeholder">📸 Notícia</div>
                         <div class="noticia-corpo">
                             <h3>Brasil vence mais uma e se classifica para as oitavas!</h3>
                             <span class="tempo-noticia">Há 15 minutos</span>
@@ -194,7 +174,7 @@
         </section>
     </main>
 
-    <!-- ARQUIVOS DE LÓGICA JAVASCRIPT -->
+    <!-- ARQUIVOS DE LÓGICA JAVASCRIPT (Mantidos perfeitamente isolados) -->
     <script src="js/api.js"></script>
     <script src="js/render.js"></script>
     <script src="js/app.js"></script>

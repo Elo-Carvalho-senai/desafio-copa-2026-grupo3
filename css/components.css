@@ -1,0 +1,356 @@
+/* HEADER E NAVBAR SUPERIOR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 15px 8%;
+    border-bottom: 2px solid #eef2f0;
+}
+
+.navbar .logo {
+    color: var(--verde-escuro);
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+.navbar .logo span {
+    color: var(--ouro-cup);
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: #64748b;
+    margin-left: 24px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.navbar nav a.active, .navbar nav a:hover {
+    color: var(--verde-escuro);
+    border-bottom: 3px solid var(--verde-escuro);
+    padding-bottom: 4px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-search {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.country-selector {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.arrow-down {
+    font-size: 0.6rem;
+    color: #64748b;
+}
+
+/* CONTAINER GERAL DO DASHBOARD */
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 8%;
+}
+
+/* HERO BANNER PRINCIPAL */
+.hero {
+    background: linear-gradient(135deg, #ffffff 0%, #edf5f1 100%);
+    margin: 30px 0;
+    padding: 45px;
+    border-radius: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e2ece7;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    color: var(--verde-escuro);
+    line-height: 1.1;
+}
+
+.hero h1 .highlight {
+    color: var(--ouro-cup);
+}
+
+.hero p {
+    color: #4a5d53;
+    margin: 15px 0 25px 0;
+}
+
+.btn-live {
+    background-color: var(--verde-escuro);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-family: var(--fonte-titulos);
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-live:hover {
+    background-color: #1e4634;
+    transform: translateY(-2px);
+}
+
+/* CARDS PADRÃO */
+.card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid #e8edea;
+    box-shadow: 0 4px 12px rgba(45, 106, 79, 0.02);
+}
+
+/* WIDGETS GRID (SUPERIOR) */
+.widgets-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.badge-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--verde-claro);
+    letter-spacing: 0.8px;
+    display: block;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.widget-proximo {
+    border-left: 5px solid var(--ouro-cup);
+}
+
+.confronto-flex {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.time-bloco {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.time-nome {
+    font-family: var(--fonte-titulos);
+    font-size: 1.25rem;
+    color: var(--verde-escuro);
+}
+
+.vs {
+    font-family: var(--fonte-titulos);
+    color: var(--ouro-cup);
+    font-weight: bold;
+}
+
+.info-partida .data-hora {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.info-partida .estadio {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.numero-grande {
+    font-size: 3.5rem;
+    color: var(--verde-escuro);
+    line-height: 1;
+}
+
+.subtexto {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+/* JOGOS AO VIVO */
+.secao-jogos {
+    margin-bottom: 40px;
+}
+
+.secao-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.secao-header h2 {
+    font-size: 1.3rem;
+    color: var(--verde-escuro);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ver-todos {
+    text-decoration: none;
+    color: var(--verde-claro);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.jogos-live-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.card-jogo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.grupo-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 12px;
+}
+
+.placar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.time-linha {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.gols-marcador {
+    font-family: var(--fonte-titulos);
+    font-size: 1.2rem;
+    color: var(--verde-escuro);
+    margin-left: 6px;
+}
+
+.placar-separador {
+    color: #cbd5e1;
+    font-weight: bold;
+}
+
+.tempo-jogo {
+    background-color: #e2f0e8;
+    color: var(--verde-escuro);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* DUAS COLUNAS INFERIORES */
+.conteudo-duas-colunas {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 32px;
+}
+
+.conteudo-duas-colunas h2 {
+    font-size: 1.2rem;
+    color: var(--verde-escuro);
+    margin-bottom: 16px;
+}
+
+/* TABELA DE CLASSIFICAÇÃO */
+.table-container {
+    padding: 10px 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 14px 0;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+td {
+    padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.95rem;
+    color: var(--azul-escuro);
+}
+
+.flex-align {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+/* NOTÍCIAS */
+.noticias-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card-noticia {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.imagem-noticia-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #e2e8f0;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.noticia-corpo h3 {
+    font-size: 1rem;
+    color: var(--azul-escuro);
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.tempo-noticia {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
