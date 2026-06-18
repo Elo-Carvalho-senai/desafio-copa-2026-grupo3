@@ -5,35 +5,25 @@
 // =========================================================
 async function inicializarPainel() {
     try {
-        // Busca o retorno bruto cadastrado no servidor
         const retornoAPI = await obterDadosDaCopa("/get/games");
-
-        // 🧙‍♂️ MÁGICA DA CORREÇÃO: Verifica se a lista veio direto ou dentro de uma propriedade (ex: retornoAPI.games ou retornoAPI.data)
-        // Caso a API mude, essa linha garante que 'partidas' seja SEMPRE uma lista/array puro
         const partidas = Array.isArray(retornoAPI) ? retornoAPI : (retornoAPI.games || retornoAPI.data || Object.values(retornoAPI));
 
-        // -------------------------------------------------
-        // LOGICA DO GOLFINHO: FILTRO DO PRÓXIMO JOGO REAL
-        // -------------------------------------------------
-        // Encontra o primeiro jogo da lista da FIFA cujo status NÃO seja 'finished'
+        // Filtro inteligente para encontrar a próxima partida agendada
         const proximoJogoReal = partidas.find(jogo => jogo.status !== 'finished') || partidas[0];
 
         if (proximoJogoReal) {
             const containerProximo = document.getElementById("proximo-jogo-container");
-
+            
             if (containerProximo) {
-                // Força letras minúsculas para ler o arquivo local correto da pasta do grupo
                 const flagHome = proximoJogoReal.home_team_id ? proximoJogoReal.home_team_id.toLowerCase() : "un";
                 const flagAway = proximoJogoReal.away_team_id ? proximoJogoReal.away_team_id.toLowerCase() : "un";
-
-                // Formata a data vinda do banco de dados da API
-                const dataJogo = proximoJogoReal.date ? new Date(proximoJogoReal.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'SHORT' }).toUpperCase() : "20 JUN";
+                
+                const dataJogo = proximoJogoReal.date ? new Date(proximoJogoReal.date).toLocaleDateString('pt-BR', {day: '2-digit', month: 'SHORT'}).toUpperCase() : "20 JUN";
                 const horaJogo = proximoJogoReal.time || "22:00";
                 const estadioJogo = proximoJogoReal.stadium_name || "SoFi Stadium - Los Angeles";
 
-                // Injeta a estrutura exata do novo modelo de card sincronizado
                 containerProximo.innerHTML = `
-                    <span class="badge-title">🗓️ PRÓXIMO JOGO</span>
+                    <span class="badge-title"><img src="assets/calendario-icon.png" class="card-title-icon" alt=""> PRÓXIMO JOGO</span>
                     
                     <div class="confronto-layout-novo">
                         <img src="assets/bandeiras/${flagHome}.png" class="flag-medium" alt="">
@@ -54,22 +44,16 @@ async function inicializarPainel() {
             }
         }
 
-        // -------------------------------------------------
-        // ATUALIZAÇÃO DOS CONTADORES REAIS (WIDGETS 2 E 3)
-        // -------------------------------------------------
-        // Contador de partidas totais do cronograma oficial da FIFA
-
-        // Contador de partidas totais
+        // Atualização do contador do Card 2
         const totalJogosContador = document.getElementById("qtd-jogos-hoje");
         if (totalJogosContador) {
             totalJogosContador.textContent = partidas.length || "104";
         }
 
-        // 🧙‍♂️ MÁGICA DA CORREÇÃO DOS GOLS: Converte os valores para Número antes de somar
+        // CORREÇÃO DOS GOLS: Soma de inteiros matemáticos pura
         const totalGolsContador = document.getElementById("total-gols");
         if (totalGolsContador) {
             const somatorioGols = partidas.reduce((acumulador, jogo) => {
-                // O Number() impede que os números fiquem grudados como texto
                 const golsHome = Number(jogo.home_score) || 0;
                 const golsAway = Number(jogo.away_score) || 0;
                 return acumulador + golsHome + golsAway;
@@ -77,10 +61,7 @@ async function inicializarPainel() {
             totalGolsContador.textContent = somatorioGols;
         }
 
-
-        // -------------------------------------------------
-        // RENDERIZAÇÃO DO GRID INFERIOR (AO VIVO AGORA)
-        // -------------------------------------------------
+        // Renderização dos cards inferiores do ui.js
         if (typeof renderizarPartidas === "function") {
             renderizarPartidas(partidas);
         }
@@ -88,60 +69,60 @@ async function inicializarPainel() {
     } catch (erro) {
         console.error("Falha ao inicializar o painel com a API:", erro);
         if (typeof exibirMensagemErroUI === "function") {
-            exibirMensagemErroUI("Não foi possível carregar ou sincronizar os dados em tempo real.");
+            exibirMensagemErroUI("Não foi possível carregar os dados em tempo real.");
         }
     }
 }
 
 // =========================================================
-// 2. MOTOR DE NAVEGAÇÃO DE PÁGINA ÚNICA (SISTEMA DE ABAS SPA)
+// 2. MOTOR DE NAVEGAÇÃO DE PÁGINA ÚNICA (SPA) — TELA GRUPOS
 // =========================================================
 function ativarNavegacaoMenu() {
-    // Captura os links usando a classe correta do cabeçalho de vocês
     const linksMenu = document.querySelectorAll("#main-nav .nav-link, .navbar nav a");
     
-    const telaInicio = document.getElementById("secao-inicio");
+    const secaoCardsSuperiores = document.getElementById("aba-inicio");
+    const secaoTabelaNoticias = document.getElementById("aba-classificacao");
+    const secaoJogosAoVivo = document.getElementById("jogos-container")?.parentElement;
     const telaGrupos = document.getElementById("secao-grupos");
 
     linksMenu.forEach(link => {
         link.addEventListener("click", (evento) => {
-            evento.preventDefault();
+            evento.preventDefault(); 
+
+            linksMenu.forEach(l => l.classList.remove("active"));
+            link.classList.add("active");
 
             const textoBotao = link.textContent.trim().toLowerCase();
 
-            // SÓ FAZ A NAVEGAÇÃO SE FOR CLICADO EM INÍCIO OU GRUPOS/CLASSIFICAÇÃO
             if (textoBotao === "início") {
-                linksMenu.forEach(l => l.classList.remove("active"));
-                link.classList.add("active");
-                
+                secaoCardsSuperiores?.classList.remove("secao-oculta");
+                secaoTabelaNoticias?.classList.remove("secao-oculta");
+                if (secaoJogosAoVivo) secaoJogosAoVivo.style.display = "block";
                 telaGrupos?.classList.remove("active");
-                telaInicio?.classList.add("active");
             } 
             else if (textoBotao === "grupos" || textoBotao === "classificação") {
-                linksMenu.forEach(l => l.classList.remove("active"));
-                link.classList.add("active");
-
-                telaInicio?.classList.remove("active");
-                telaGrupos?.classList.add("active");
+                secaoCardsSuperiores?.classList.add("secao-oculta");
+                secaoTabelaNoticias?.classList.add("secao-oculta");
+                if (secaoJogosAoVivo) secaoJogosAoVivo.style.display = "none";
                 
-                // Dispara a busca real na API de todos os grupos
+                // Ativa a tela de grupos limpa que você pediu
+                telaGrupos?.classList.add("active");
                 buscarEExibirTodosOsGrupos();
             }
         });
     });
 }
 
-// 📦 FUNÇÃO QUE BUSCA OS 12 GRUPOS E SEUS PAÍSES NA API
+// 📦 CARREGA OS 12 GRUPO DA FIFA COM OS PAÍSES DELES
 async function buscarEExibirTodosOsGrupos() {
     const gridGrupos = document.getElementById("grid-todos-grupos");
     if (!gridGrupos) return;
 
-    gridGrupos.innerHTML = "<div style='grid-column: 1/-1; text-align:center; padding:40px; color:#2D6A4F; font-weight:600;'>Buscando grupos oficiais da FIFA...</div>";
+    gridGrupos.innerHTML = "<div class='loading-placeholder'>Buscando grupos oficiais da FIFA...</div>";
 
     try {
-        // Consome o endpoint real mapeado na API
         const dadosGrupos = await obterDadosDaCopa("/get/groups");
-        gridGrupos.innerHTML = ""; // Limpa a mensagem
+        gridGrupos.innerHTML = ""; 
 
         dadosGrupos.forEach(grupo => {
             const card = document.createElement("div");
@@ -149,7 +130,6 @@ async function buscarEExibirTodosOsGrupos() {
 
             let listaTimesHTML = `<ul class="lista-times-grupo">`;
 
-            // Passa por cada país de dentro do respectivo grupo
             grupo.teams.forEach(time => {
                 const flagTime = time.id ? time.id.toLowerCase() : "un";
                 listaTimesHTML += `
@@ -170,99 +150,13 @@ async function buscarEExibirTodosOsGrupos() {
         });
 
     } catch (erro) {
-        console.error("Erro ao listar grupos:", erro);
-        gridGrupos.innerHTML = "<p style='grid-column:1/-1; text-align:center; color:red;'>Não foi possível carregar as chaves dos grupos.</p>";
+        console.error("Erro ao listar os 12 grupos:", erro);
+        gridGrupos.innerHTML = "<p style='text-align:center; color:red;'>Erro ao carregar as chaves.</p>";
     }
 }
 
-// Substitua a função carregarAbaGrupos dentro de js/app.js por esta completa:
-async function carregarAbaGrupos() {
-    const container = document.getElementById("todos-grupos-container");
-    if (!container) return;
-
-    // Injeta o estado visual de carregamento dinâmico amigável
-    container.innerHTML = "<div class='loading-placeholder'>Buscando classificação oficial dos 12 grupos na API...</div>";
-
-    try {
-        // 1. Consome o endpoint real de grupos restrito por JWT
-        const dadosGrupos = await obterDadosDaCopa("/get/groups");
-        container.innerHTML = ""; // Limpa o carregando
-
-        if (!dadosGrupos || dadosGrupos.length === 0) {
-            container.innerHTML = "<p>Nenhum dado de classificação disponível no momento.</p>";
-            return;
-        }
-
-        // 2. Passa limpando e organizando cada um dos grupos (De A até L)
-        dadosGrupos.forEach(grupo => {
-            const cardGrupo = document.createElement("div");
-            cardGrupo.className = "card-grupo-tabela"; // Aplica o novo estilo em grid
-
-            // Monta o cabeçalho estrutural da mini tabela do respectivo grupo
-            let tabelaHTML = `
-                <h3 class="titulo-grupo-api">GRUPO ${grupo.name}</h3>
-                <table class="tabela-mini-grupo">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>SELEÇÃO</th>
-                            <th class="text-center">J</th>
-                            <th class="text-center">SG</th>
-                            <th class="text-center">PTS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-
-            // 3. Organiza os times de dentro deste grupo baseado na classificação retornada
-            // Caso a API traga os times desordenados, o sort garante que o de mais pontos fique no topo
-            const timesOrdenados = grupo.teams.sort((a, b) => b.pts - a.pts);
-
-            timesOrdenados.forEach((time, indice) => {
-                // Força o ID em minúsculas para ler o arquivo da sua pasta local de bandeiras
-                const codigoBandeiraLocal = time.id ? time.id.toLowerCase() : "un";
-
-                tabelaHTML += `
-                    <tr>
-                        <td class="bold text-center">${indice + 1}</td>
-                        <td>
-                            <div class="celula-time-flex">
-                                <img src="assets/bandeiras/${codigoBandeiraLocal}.png" class="flag-small" alt="">
-                                <span>${time.name_en || 'A definir'}</span>
-                            </div>
-                        </td>
-                        <td class="text-center">${time.mp || 0}</td>
-                        <td class="text-center">${time.gd || 0}</td>
-                        <td class="text-center pontos-destaque">${time.pts || 0}</td>
-                    </tr>
-                `;
-            });
-
-            // Fecha as tags da tabela e injeta o bloco completo dentro do grid geral
-            tabelaHTML += `
-                    </tbody>
-                </table>
-            `;
-
-            cardGrupo.innerHTML = TableHTML = tabelaHTML;
-            container.appendChild(cardGrupo);
-        });
-
-    } catch (erro) {
-        console.error("Falha ao carregar tabelas dos grupos:", erro);
-        container.innerHTML = `
-            <p style='color:#991b1b; text-align:center; padding: 20px; background-color: #fef2f2; border-radius: 12px; width: 100%; font-weight: 500;'>
-                ⚠️ Não foi possível sincronizar as tabelas de classificação com o servidor.
-            </p>
-        `;
-    }
-}
-
-
-// =========================================================
-// 3. DISPARADORES DE CARREGAMENTO INICIAL
-// =========================================================
+// INITIALIZER
 document.addEventListener("DOMContentLoaded", () => {
-    inicializarPainel();   // Executa o consumo bruto e preenchimento da API
-    ativarNavegacaoMenu(); // Ativa os ouvintes de clique das abas
+    inicializarPainel();   
+    ativarNavegacaoMenu(); 
 });

@@ -1,10 +1,10 @@
-// js/render.js
+// js/ui.js
 
 function renderizarPartidas(partidas) {
     const container = document.getElementById("jogos-container");
     if (!container) return;
     
-    container.innerHTML = ""; // Limpa a mensagem de carregamento
+    container.innerHTML = ""; // Limpa o carregando
 
     if (!partidas || partidas.length === 0) {
         container.innerHTML = "<p>Nenhuma partida encontrada no momento.</p>";
@@ -16,11 +16,11 @@ function renderizarPartidas(partidas) {
         const card = document.createElement("div");
         card.className = "card card-jogo";
         
-        // Garante letras minúsculas para bater com o nome do arquivo salvo por vocês
+        // Garante letras minúsculas para ler a pasta local do grupo
         const flagHome = jogo.home_team_id ? jogo.home_team_id.toLowerCase() : "un";
         const flagAway = jogo.away_team_id ? jogo.away_team_id.toLowerCase() : "un";
 
-        // CORREÇÃO: Removido totalmente o flagcdn e apontado para a pasta local assets/bandeiras/
+        // CORREÇÃO DA SINTAXE: Lê de forma limpa a pasta de bandeiras locais do grupo
         card.innerHTML = `
             <span class="grupo-label">PARTIDA ${jogo.id}</span>
             <div class="placar-container">
