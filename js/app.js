@@ -8,40 +8,54 @@ async function inicializarPainel() {
         const retornoAPI = await obterDadosDaCopa("/get/games");
         const partidas = Array.isArray(retornoAPI) ? retornoAPI : (retornoAPI.games || retornoAPI.data || Object.values(retornoAPI));
 
-        // Filtro inteligente para encontrar a próxima partida agendada
-        const proximoJogoReal = partidas.find(jogo => jogo.status !== 'finished') || partidas[0];
+        // 🔥 MOTOR DINÂMICO: Procura o primeiro jogo que NÃO terminou ('finished') e que NÃO está ao vivo ('aovivo')
+        // Se todos já tiverem acabado, ele pega o último jogo da lista por segurança.
+        const proximoJogoReal = partidas.find(jogo => jogo.status !== 'finished' && jogo.status !== 'live' && jogo.status !== 'aovivo') || partidas[partidas.length - 1];
 
         if (proximoJogoReal) {
             const containerProximo = document.getElementById("proximo-jogo-container");
             
             if (containerProximo) {
-                // CORREÇÃO DOS CAMINHOS: Ajustado de "assets/bandeiras/" para "assets/flags/"
+                // Obtém as siglas dos países vindas da API (ex: "br", "mx", "us")
                 const flagHome = proximoJogoReal.home_team_id ? proximoJogoReal.home_team_id.toLowerCase() : "un";
                 const flagAway = proximoJogoReal.away_team_id ? proximoJogoReal.away_team_id.toLowerCase() : "un";
                 
-                // Mapeia siglas específicas para arquivos criados localmente pelo grupo
-                const nomeFlagHome = flagHome === "br" ? "brasil" : (flagHome === "ht" ? "haiti" : flagHome);
-                const nomeFlagAway = flagAway === "br" ? "brasil" : (flagAway === "ht" ? "haiti" : flagAway);
+                // 🌐 SOLUÇÃO 100% ONLINE: Puxa as bandeiras direto da internet (FlagCDN) em média resolução (w160)
+                const urlBandeiraHome = flagHome === "un" ? "https://flagcdn.com/w160/un.png" : `https://flagcdn.com/w160/${flagHome}.png`;
+                const urlBandeiraAway = flagAway === "un" ? "https://flagcdn.com/w160/un.png" : `https://flagcdn.com/w160/${flagAway}.png`;
 
-                const dataJogo = proximoJogoReal.date ? new Date(proximoJogoReal.date).toLocaleDateString('pt-BR', {day: '2-digit', month: 'short'}).toUpperCase() : "20 JUN";
-                const horaJogo = proximoJogoReal.time || "22:00";
-                const estadioJogo = proximoJogoReal.stadium_name || "SoFi Stadium - Los Angeles";
+                // Formata a data de forma bonita (Ex: "20 JUN" ou baseado no que vier da API)
+                let dataTexto = "A DEFINIR";
+                if (proximoJogoReal.date) {
+                    const partesData = proximoJogoReal.date.split('-'); // Trata o formato YYYY-MM-DD
+                    if (partesData.length === 3) {
+                        const meses = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+                        const mesIndice = parseInt(partesData[1], 10) - 1;
+                        dataTexto = `${partesData[2]} ${meses[mesIndice]}`;
+                    }
+                }
+                
+                const horaJogo = proximoJogoReal.time || "--:--";
+                const estadioJogo = proximoJogoReal.stadium_name || "Estádio Oficial FIFA";
 
-                // CORREÇÃO DO ÍCONE: Ajustado de "assets/calendario-icon.png" para "assets/img-cards/calendario.png"
+                // Injeta os dados REAIS e dinâmicos no card do topo
                 containerProximo.innerHTML = `
-                    <span class="badge-title"><img src="assets/img-cards/calendario.png" class="card-title-icon" alt=""> PRÓXIMO JOGO</span>
+                    <span class="badge-title">
+                        <img src="assets/img-cards/calendario.png" class="card-title-icon" alt=""> 
+                        PRÓXIMO JOGO DO TORNEIO
+                    </span>
                     
                     <div class="confronto-layout-novo">
-                        <img src="assets/flags/${nomeFlagHome}.png" class="flag-medium" alt="">
+                        <img src="${urlBandeiraHome}" class="flag-medium" alt="${proximoJogoReal.home_team_name_en}" style="border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                         <span class="texto-confronto-novo">
                             ${proximoJogoReal.home_team_name_en} x ${proximoJogoReal.away_team_name_en}
                         </span>
-                        <img src="assets/flags/${nomeFlagAway}.png" class="flag-medium" alt="">
+                        <img src="${urlBandeiraAway}" class="flag-medium" alt="${proximoJogoReal.away_team_name_en}" style="border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                     </div>
                     
                     <div class="info-rodape-card-novo">
                         <div class="info-partida-nova">
-                            <p class="data-hora-nova">${dataJogo} • ${horaJogo}</p>
+                            <p class="data-hora-nova">${dataTexto} • ${horaJogo}</p>
                             <p class="estadio-novo">${estadioJogo}</p>
                         </div>
                         <button class="btn-seta-nova">➔</button>
@@ -50,13 +64,13 @@ async function inicializarPainel() {
             }
         }
 
-        // Atualização do contador do Card 2 (Jogos Hoje / Total)
+        // Atualização do contador do Card 2 (Total de Jogos)
         const totalJogosContador = document.getElementById("qtd-jogos-hoje");
         if (totalJogosContador) {
             totalJogosContador.textContent = partidas.length || "104";
         }
 
-        // CORREÇÃO DOS GOLS: Soma de inteiros matemáticos pura
+        // Soma de gols matemáticos pura
         const totalGolsContador = document.getElementById("total-gols");
         if (totalGolsContador) {
             const somatorioGols = partidas.reduce((acumulador, jogo) => {
@@ -67,14 +81,11 @@ async function inicializarPainel() {
             totalGolsContador.textContent = somatorioGols;
         }
 
-        // Chamar a CazéTV para gerenciar de forma limpa o container de transmissões
+        // Alimenta os cards da CazéTV na seção de lives
         await carregarCazeTVNoPainel();
 
     } catch (erro) {
         console.error("Falha ao inicializar o painel com a API:", erro);
-        if (typeof exibirMensagemErroUI === "function") {
-            exibirMensagemErroUI("Não foi possível carregar os dados em tempo real.");
-        }
     }
 }
 
@@ -84,7 +95,6 @@ async function inicializarPainel() {
 function ativarNavegacaoMenu() {
     const linksMenu = document.querySelectorAll("#main-nav .nav-link, .navbar nav a");
     
-    const secaoCardsSuperiores = document.querySelector(".hero")?.parentElement; 
     const secaoTabelaNoticias = document.getElementById("aba-classificacao");
     const secaoJogosAoVivo = document.getElementById("jogos-container")?.parentElement;
     const telaGrupos = document.getElementById("secao-grupos");
@@ -106,7 +116,8 @@ function ativarNavegacaoMenu() {
                 if (telaGrupos) telaGrupos.style.display = "none";
             } 
             else if (textoBotao === "grupos" || textoBotao === "classificação") {
-                document.querySelector(".hero")?.style.setProperties ? null : document.querySelector(".hero").style.display = "none";
+                const hero = document.querySelector(".hero");
+                if (hero) hero.style.display = "none";
                 const widgets = document.querySelector(".widgets-grid");
                 if (widgets) widgets.style.display = "none";
                 
@@ -142,12 +153,12 @@ async function buscarEExibirTodosOsGrupos() {
 
             grupo.teams.forEach(time => {
                 const flagTime = time.id ? time.id.toLowerCase() : "un";
-                // CORREÇÃO DO CAMINHO: Ajustado para usar pasta real local "assets/flags/"
-                const nomeFlagLocal = flagTime === "br" ? "brasil" : (flagTime === "mx" ? "mexico" : flagTime);
+                // Usa 100% FlagCDN da internet para a lista de grupos também!
+                const urlFlagGrupo = flagTime === "un" ? "https://flagcdn.com/w40/un.png" : `https://flagcdn.com/w40/${flagTime}.png`;
 
                 listaTimesHTML += `
                     <li>
-                        <img src="assets/flags/${nomeFlagLocal}.png" class="flag-small" onerror="this.src='https://flagcdn.com/w40/${flagTime}.png'" alt="">
+                        <img src="${urlFlagGrupo}" class="flag-small" alt="" style="border-radius:2px;">
                         <span>${time.name_en || 'A definir'}</span>
                     </li>
                 `;
@@ -174,17 +185,14 @@ async function carregarCazeTVNoPainel() {
     if (!containerJogos) return;
 
     try {
-        // 1. Busca transmissões tratadas da CazéTV via api.js
         const partidasCazeTV = await buscarPartidasAPI();
-        
-        // 2. Executa a montagem limpa dos cards na tela
         renderizarPartidas(partidasCazeTV);
     } catch (erro) {
         console.error("Erro ao integrar com o YouTube:", erro);
     }
 }
 
-// INITIALIZER ÚNICO E ORGANIZADO
+// INITIALIZER
 document.addEventListener("DOMContentLoaded", () => {
     inicializarPainel();   
     ativarNavegacaoMenu(); 
