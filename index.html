@@ -66,7 +66,7 @@
 
             <!-- Card Próximo Jogo (Com o fundo verde claro da foto) -->
             <div class="card widget-proximo" id="proximo-jogo-container">
-                <span class="badge-title"> 
+                <span class="badge-title">
                     <img src="assets/img-cards/calendario.png" alt="" class="card-title-icon">
                     PRÓXIMO JOGO</span>
                 <div class="confronto-layout-novo">
@@ -88,25 +88,35 @@
 
             <!-- Card Jogos de Hoje (Com marca d'água de campo de futebol) -->
             <div class="card widget-info card-jogos-hoje">
-                <span class="badge-title"> 
+                <span class="badge-title">
                     <img src="assets/img-cards/bola-futebol.png" alt="" class="card-title-icon">
                     JOGOS HOJE</span>
                 <div class="widget-corpo">
-                    <span class="numero-grande" id="qtd-jogos-hoje">--</span>
+                    <span class="numero-grande" id="qtd-jogos-hoje">6</span>
                     <p class="subtexto">partidas</p>
                 </div>
-                
+
             </div>
 
-            <!-- Card Gols Marcados (Com marca d'água do jogador) -->
+            <!-- Card Gols Marcados -->
             <div class="card widget-info card-gols-marcados">
-                <span class="badge-title">🥅 GOLS MARCADOS</span>
+                <span class="badge-title">
+                    <!-- Trocado o emoji pela imagem oficial do ícone de trave/gols -->
+                    <img src="assets/img-cards/gols-marcados.png" class="card-title-icon" alt="">
+                    GOLS MARCADOS
+                </span>
+
                 <div class="widget-corpo">
-                    <span class="numero-grande" id="total-gols">--</span>
-                    <p class="subtexto">gols</p>
+                    <div class="widget-texto-bloco">
+                        <span class="numero-grande" id="total-gols">--</span>
+                        <p class="subtexto">gols</p>
+                    </div>
+
+                    <!-- O jogador azul, inteiro e espelhado fica aqui -->
+                    <img src="" class="jogador-bg" alt="" aria-hidden="true">
                 </div>
-                <img src="assets/jogador.webp" class="jogador-bg" alt="" aria-hidden="true">
             </div>
+
         </section>
 
         <!-- SEÇÃO: JOGOS AO VIVO AGORA -->
@@ -123,70 +133,82 @@
         </section>
 
         <!-- SEÇÃO INFERIOR DE DUAS COLUNAS: CLASSIFICAÇÃO & NOTÍCIAS -->
-        <section class="conteudo-duas-colunas">
+        <!-- SUBSTITUA A SUA TABELA E NOTÍCIAS POR ESTA ESTRUTURA ALINHADA -->
+        <section class="conteudo-duas-colunas" id="aba-classificacao">
 
-            <!-- Coluna Esquerda: Tabela de Grupos -->
+            <!-- Tabela de Classificação Arrumada -->
             <div class="coluna-classificacao">
                 <h2>CLASSIFICAÇÃO — GRUPO G</h2>
                 <div class="card table-container">
-                    <table>
+                    <table style="width: 100%; border-collapse: collapse;">
                         <thead>
                             <tr>
-                                <th class="text-center">#</th>
-                                <th>SELEÇÃO</th>
-                                <th class="text-center">J</th>
-                                <th class="text-center">V</th>
-                                <th class="text-center">E</th>
-                                <th class="text-center">D</th>
-                                <th class="text-center">PTS</th>
+                                <th style="text-align: center; width: 40px;">#</th>
+                                <th style="text-align: left;">SELEÇÃO</th>
+                                <th style="text-align: center; width: 50px;">J</th>
+                                <th style="text-align: center; width: 50px;">V</th>
+                                <th style="text-align: center; width: 50px;">E</th>
+                                <th style="text-align: center; width: 50px;">D</th>
+                                <th style="text-align: center; width: 60px;">PTS</th>
                             </tr>
                         </thead>
                         <tbody id="tabela-grupo">
                             <tr>
-                                <td class="text-center bold">1</td>
-                                <!-- Alterado para o link da internet público -->
-                                <td class="flex-align"><img src="https://flagcdn.com" alt="" class="flag-small"> Brasil
+                                <td style="text-align: center;" class="bold">1</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <!-- Aponta para a sua pasta de bandeiras locais -->
+                                        <img src="assets/bandeiras/br.png" class="flag-small" alt="Brasil">
+                                        <span>Brasil</span>
+                                    </div>
                                 </td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center bold">6</td>
+                                <td style="text-align: center;">2</td>
+                                <td style="text-align: center;">2</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;" class="bold">6</td>
                             </tr>
                             <tr>
-                                <td class="text-center bold">2</td>
-                                <!-- Alterado para o link da internet público -->
-                                <td class="flex-align"><img src="https://flagcdn.com" alt="" class="flag-small">
-                                    Portugal</td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center bold">3</td>
+                                <td style="text-align: center;" class="bold">2</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <!-- Aponta para a sua pasta de bandeiras locais -->
+                                        <img src="assets/bandeiras/pt.png" class="flag-small" alt="Portugal">
+                                        <span>Portugal</span>
+                                    </div>
+                                </td>
+                                <td style="text-align: center;">2</td>
+                                <td style="text-align: center;">1</td>
+                                <td style="text-align: center;">0</td>
+                                <td style="text-align: center;">1</td>
+                                <td style="text-align: center;" class="bold">3</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Coluna Direita: Notícias Rápidas -->
+            <!-- Bloco de Notícias Arrumado -->
             <div class="coluna-noticias">
                 <div class="secao-header">
                     <h2>ÚLTIMAS NOTÍCIAS</h2>
                     <a href="#" class="ver-todos">Ver todas</a>
                 </div>
-                <div class="noticias-stack">
-                    <article class="card card-noticia">
-                        <div class="imagem-noticia-placeholder">📸 Notícia</div>
-                        <div class="noticia-corpo">
-                            <h3>Brasil vence mais uma e se classifica para as oitavas!</h3>
-                            <span class="tempo-noticia">Há 15 minutos</span>
-                        </div>
-                    </article>
+                <div class="card card-noticia" style="display: flex; gap: 15px; align-items: center;">
+                    <div class="imagem-noticia-placeholder"
+                        style="background-color: #e2e8f0; width: 80px; height: 80px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                        📰
+                    </div>
+                    <div class="noticia-corpo">
+                        <h3 style="font-size: 1rem; margin-bottom: 4px; color: #0F2942;">Brasil vence mais uma e se
+                            classifica para as oitavas!</h3>
+                        <span class="tempo-noticia" style="font-size: 0.8rem; color: #94a3b8;">Há 15 minutos</span>
+                    </div>
                 </div>
             </div>
 
         </section>
+        <!-- Fim da section conteudo-duas-colunas anterior -->
     </main>
 
     <!-- =========================================================
@@ -194,11 +216,12 @@
      ========================================================= -->
     <footer class="site-footer">
         <div class="footer-grid">
-            
+
             <!-- Coluna 1: Sobre o Projeto -->
             <div class="footer-col">
                 <h4>GOSSIP <span>CUP</span></h4>
-                <p>Portal acadêmico focado em cobertura, estatísticas e acompanhamento em tempo real da Copa do Mundo FIFA 2026.</p>
+                <p>Portal acadêmico focado em cobertura, estatísticas e acompanhamento em tempo real da Copa do Mundo
+                    FIFA 2026.</p>
             </div>
 
             <!-- Coluna 2: Informações Acadêmicas -->

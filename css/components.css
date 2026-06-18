@@ -366,14 +366,59 @@
 }
 
 .card-gols-marcados {
-    background-color: #edf1f4!important; /* Azul acinzentado da foto */
+    background-color: #F4F7FA !important; /* Tom azulado claro oficial */
     border: 1px solid #E6ECF2 !important;
+    position: relative;
+    overflow: hidden;
 }
 
-.widget-corpo {
+.card-gols-marcados .badge-title {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+}
+
+.card-gols-marcados .widget-corpo {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: calc(100% - 20px) !important; /* Desconta o espaço do título */
+    margin-top: 5px;
+}
+
+.card-gols-marcados .widget-texto-bloco {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.jogador-bg {
+    position: relative !important;
+    height: 100px !important;       /* Altura exata para caber na caixa de 180px sem sumir */
+    width: auto !important;
+    object-fit: contain !important;
+    pointer-events: none;
+    align-self: flex-end !important; /* Encosta a bola e os pés no chão do card */
+    margin-bottom: -15px !important; /* Ajuste milimétrico para colar na borda inferior */
+    margin-right: -10px !important;  /* Encosta levemente no canto direito */
+    
+    /* Mantém o espelhamento perfeito para a esquerda */
+    transform: scaleX(-1) !important; 
+}
+
+.card-gols-marcados .card-title-icon {
+    width: 20px !important;
+    height: 20px !important;
+    object-fit: contain !important;
+    display: inline-block !important;
 }
 
 .numero-grande {
@@ -669,4 +714,94 @@ html, body {
         width: 100%;
         text-align: center;
     }
+}
+
+/* ==========================================================================
+   TELA GRUPOS — TABELAS DE CLASSIFICAÇÃO DOS 12 GRUPOS DA FIFA
+   ========================================================================== */
+
+/* Container geral onde as tabelas injetadas via JS vão se organizar lado a lado */
+#todos-grupos-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+    gap: 24px !important;
+    width: 100%;
+}
+
+/* Estilo para cada card de grupo individual */
+.card-grupo-tabela {
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 20px;
+    border: 1px solid #eaf0ed;
+    box-shadow: 0 4px 10px rgba(45, 106, 79, 0.02);
+}
+
+/* Título de cada grupo (Ex: GRUPO A, GRUPO B) */
+.titulo-grupo-api {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.15rem;
+    color: #1E4634; /* Verde escuro oficial da Gossip Cup */
+    margin-bottom: 12px;
+    font-weight: 700;
+    border-bottom: 2px solid #EEF5F1;
+    padding-bottom: 6px;
+}
+
+/* Tabela interna customizada para os minicards de grupos */
+.tabela-mini-grupo {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.85rem;
+}
+
+.tabela-mini-grupo th {
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    padding: 8px 4px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.tabela-mini-grupo td {
+    padding: 10px 4px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #274C77; /* Azul escuro corporativo */
+}
+
+/* Alinhamento flexível para a bandeira local e o nome da seleção ficarem colados */
+.celula-time-flex {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+/* Garante o formato redondo perfeito nas bandeiras baixadas pelo grupo */
+.tabela-mini-grupo .flag-small {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
+
+/* Destaque em negrito para os pontos da tabela */
+.pontos-destaque {
+    font-weight: 700;
+    color: #1E4634 !important;
+}
+/* Força o alinhamento centralizado das colunas da tabela */
+th.text-center, td.text-center {
+    text-align: center !important;
+}
+
+/* Garante que as imagens locais das bandeiras da tabela não fiquem gigantes */
+.flag-small {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    display: inline-block;
 }
