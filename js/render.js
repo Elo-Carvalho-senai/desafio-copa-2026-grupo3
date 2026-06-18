@@ -11,19 +11,21 @@ function renderizarPartidas(partidas) {
         return;
     }
 
-    // Renderiza as 3 primeiras partidas da API para compor a interface da Home
+    // Renderiza as 3 primeiras partidas para a home
     partidas.slice(0, 3).forEach(jogo => {
         const card = document.createElement("div");
         card.className = "card card-jogo";
         
+        // Garante letras minúsculas para bater com o nome do arquivo salvo por vocês
         const flagHome = jogo.home_team_id ? jogo.home_team_id.toLowerCase() : "un";
         const flagAway = jogo.away_team_id ? jogo.away_team_id.toLowerCase() : "un";
 
+        // CORREÇÃO: Removido totalmente o flagcdn e apontado para a pasta local assets/bandeiras/
         card.innerHTML = `
             <span class="grupo-label">PARTIDA ${jogo.id}</span>
             <div class="placar-container">
                 <div class="time-linha">
-                    <img src="https://flagcdn.com{flagHome}.png" class="flag-small" alt="">
+                    <img src="assets/bandeiras/${flagHome}.png" class="flag-small" alt="">
                     <span>${jogo.home_team_name_en || 'A definir'}</span>
                     <span class="bold">${jogo.home_score ?? 0}</span>
                 </div>
@@ -31,7 +33,7 @@ function renderizarPartidas(partidas) {
                 <div class="time-linha">
                     <span class="bold">${jogo.away_score ?? 0}</span>
                     <span>${jogo.away_team_name_en || 'A definir'}</span>
-                    <img src="https://flagcdn.com{flagAway}.png" class="flag-small" alt="">
+                    <img src="assets/bandeiras/${flagAway}.png" class="flag-small" alt="">
                 </div>
             </div>
             <span class="tempo-jogo">${jogo.status === 'finished' ? 'ENCERRADO' : 'AGENDADO'}</span>

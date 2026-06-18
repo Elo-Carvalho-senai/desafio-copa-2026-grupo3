@@ -58,7 +58,7 @@ async function inicializarPainel() {
         // ATUALIZAÇÃO DOS CONTADORES REAIS (WIDGETS 2 E 3)
         // -------------------------------------------------
         // Contador de partidas totais do cronograma oficial da FIFA
-        
+
         // Contador de partidas totais
         const totalJogosContador = document.getElementById("qtd-jogos-hoje");
         if (totalJogosContador) {
@@ -97,46 +97,82 @@ async function inicializarPainel() {
 // 2. MOTOR DE NAVEGAÇÃO DE PÁGINA ÚNICA (SISTEMA DE ABAS SPA)
 // =========================================================
 function ativarNavegacaoMenu() {
-    const linksMenu = document.querySelectorAll("#main-nav .nav-link");
-
-    // Captura as seções do seu HTML pelas classes e IDs criados
-    const secaoCardsSuperiores = document.getElementById("aba-inicio");
-    const secaoTabelaNoticias = document.getElementById("aba-classificacao");
-    const secaoJogosAoVivo = document.getElementById("jogos-container")?.parentElement;
+    // Captura os links usando a classe correta do cabeçalho de vocês
+    const linksMenu = document.querySelectorAll("#main-nav .nav-link, .navbar nav a");
+    
+    const telaInicio = document.getElementById("secao-inicio");
+    const telaGrupos = document.getElementById("secao-grupos");
 
     linksMenu.forEach(link => {
         link.addEventListener("click", (evento) => {
-            evento.preventDefault(); // Impede o navegador de dar saltos ou recarregar a tela
-
-            // Alterna a classe visual de link ativo para a barrinha verde acompanhar o clique
-            linksMenu.forEach(l => l.classList.remove("active"));
-            link.classList.add("active");
+            evento.preventDefault();
 
             const textoBotao = link.textContent.trim().toLowerCase();
 
-            // Gerencia a visibilidade das seções ocultando blocos específicos sem quebrar o layout
+            // SÓ FAZ A NAVEGAÇÃO SE FOR CLICADO EM INÍCIO OU GRUPOS/CLASSIFICAÇÃO
             if (textoBotao === "início") {
-                secaoCardsSuperiores?.classList.remove("secao-oculta");
-                secaoTabelaNoticias?.classList.remove("secao-oculta");
-                if (secaoJogosAoVivo) secaoJogosAoVivo.style.display = "block";
-            }
-            else if (textoBotao === "classificação" || textoBotao === "grupos") {
-                secaoCardsSuperiores?.classList.add("secao-oculta");
-                secaoTabelaNoticias?.classList.remove("secao-oculta");
-                if (secaoJogosAoVivo) secaoJogosAoVivo.style.display = "none";
-            }
-            else if (textoBotao === "jogos") {
-                secaoCardsSuperiores?.classList.add("secao-oculta");
-                secaoTabelaNoticias?.classList.add("secao-oculta");
-                if (secaoJogosAoVivo) secaoJogosAoVivo.style.display = "block";
-            }
-            else if (textoBotao === "notícias") {
-                secaoCardsSuperiores?.classList.add("secao-oculta");
-                secaoTabelaNoticias?.classList.remove("secao-oculta");
-                if (secaoJogosAoVivo) secaoJogosAoVivo.style.display = "none";
+                linksMenu.forEach(l => l.classList.remove("active"));
+                link.classList.add("active");
+                
+                telaGrupos?.classList.remove("active");
+                telaInicio?.classList.add("active");
+            } 
+            else if (textoBotao === "grupos" || textoBotao === "classificação") {
+                linksMenu.forEach(l => l.classList.remove("active"));
+                link.classList.add("active");
+
+                telaInicio?.classList.remove("active");
+                telaGrupos?.classList.add("active");
+                
+                // Dispara a busca real na API de todos os grupos
+                buscarEExibirTodosOsGrupos();
             }
         });
     });
+}
+
+// 📦 FUNÇÃO QUE BUSCA OS 12 GRUPOS E SEUS PAÍSES NA API
+async function buscarEExibirTodosOsGrupos() {
+    const gridGrupos = document.getElementById("grid-todos-grupos");
+    if (!gridGrupos) return;
+
+    gridGrupos.innerHTML = "<div style='grid-column: 1/-1; text-align:center; padding:40px; color:#2D6A4F; font-weight:600;'>Buscando grupos oficiais da FIFA...</div>";
+
+    try {
+        // Consome o endpoint real mapeado na API
+        const dadosGrupos = await obterDadosDaCopa("/get/groups");
+        gridGrupos.innerHTML = ""; // Limpa a mensagem
+
+        dadosGrupos.forEach(grupo => {
+            const card = document.createElement("div");
+            card.className = "mini-card-grupo";
+
+            let listaTimesHTML = `<ul class="lista-times-grupo">`;
+
+            // Passa por cada país de dentro do respectivo grupo
+            grupo.teams.forEach(time => {
+                const flagTime = time.id ? time.id.toLowerCase() : "un";
+                listaTimesHTML += `
+                    <li>
+                        <img src="assets/bandeiras/${flagTime}.png" class="flag-small" alt="">
+                        <span>${time.name_en || 'A definir'}</span>
+                    </li>
+                `;
+            });
+
+            listaTimesHTML += `</ul>`;
+
+            card.innerHTML = `
+                <h3>GRUPO ${grupo.name}</h3>
+                ${listaTimesHTML}
+            `;
+            gridGrupos.appendChild(card);
+        });
+
+    } catch (erro) {
+        console.error("Erro ao listar grupos:", erro);
+        gridGrupos.innerHTML = "<p style='grid-column:1/-1; text-align:center; color:red;'>Não foi possível carregar as chaves dos grupos.</p>";
+    }
 }
 
 // Substitua a função carregarAbaGrupos dentro de js/app.js por esta completa:

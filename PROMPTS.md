@@ -34,5 +34,11 @@ Este documento cumpre o requisito obrigatório de documentação do uso de Intel
 
 ---
 
+### 🛡️ 4. Tratamento de Timeouts e Mock de Contingência (Resiliência)
+* **Contexto/Necessidade:** Durante os testes, o servidor gratuito da API (`worldcup26.ir`) apresentou instabilidades e erros de `net::ERR_CONNECTION_TIMED_OUT`, travando as requisições assíncronas do nosso site.
+* **Prompt Utilizado:** "Como implementar um AbortController na Fetch API com JavaScript puro para capturar timeouts de conexão e ativar uma lista de dados substituta (mock local de contingência) para o site não ficar em branco caso o servidor caia?"
+* **Solução e Adaptação Humana:** Criamos uma barreira de proteção com limite de 4 segundos. Caso a API não responda a tempo, nosso script intercepta o erro e injeta um array com a estrutura exata das chaves do banco de dados oficial (como `home_team_name_en` e `pts`), garantindo que a interface mude de aba e renderize os grupos locais perfeitamente mesmo que o servidor esteja offline no momento da apresentação.
+
+
 ### 📈 Conclusão do Grupo
 A Inteligência Artificial funcionou como um copiloto técnico de alta performance. Ela acelerou a criação da casca visual repetitiva (CSS) e nos apresentou caminhos otimizados de arquitetura que economizaram horas de trabalho braçal (como o uso da API de bandeiras). O papel do grupo foi o de arquitetar a experiência, validar as respostas para garantir que nenhuma biblioteca externa proibida fosse usada e garantir a fidelidade estética ao manual de marca.
