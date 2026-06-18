@@ -5,21 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gossip Cup — Copa do Mundo FIFA 2026</title>
-    <!-- Links para as folhas de estilo separadas por escopo -->
-    <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/widgets.css">
+    <link rel="stylesheet" href="css/jogos-live.css">
+    <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/feedback.css">
 </head>
 
 <body>
 
-    <!-- CABEÇALHO / NAVEGAÇÃO SUPERIOR -->
     <header class="navbar">
         <div class="logo-container">
             <img src="assets/logo-gossip.png" alt="Logo Gossip Cup" class="logo-img">
         </div>
 
-        <!-- Menu de Navegação por abas/seções -->
         <nav id="main-nav">
             <a href="#inicio" class="nav-link active">Início</a>
             <a href="#jogos" class="nav-link">Jogos</a>
@@ -29,15 +30,13 @@
             <a href="#estatisticas" class="nav-link">Estatísticas</a>
         </nav>
 
-        <!-- Elementos do canto direito ajustados conforme a foto -->
         <div class="navbar-right">
             <div class="search-container-bg">
                 <button class="btn-search" aria-label="Buscar">🔍</button>
             </div>
             <div class="country-selector-wrapper">
                 <div class="country-selector">
-                    <!-- URL da bandeira corrigida para o servidor oficial -->
-                    <img src="https://flagcdn.com" alt="Brasil" class="flag-icon">
+                    <img src="https://flagcdn.com/w40/br.png" alt="Brasil" class="flag-icon">
                     <span class="arrow-down">⌃</span>
                 </div>
             </div>
@@ -45,18 +44,15 @@
     </header>
 
 
-    <!-- CONTEÚDO PRINCIPAL DO DASHBOARD -->
     <main class="dashboard-container">
 
         <div id="secao-grupos" class="aba-conteudo">
             <h2 style="color: #2D6A4F; font-family: 'Poppins', sans-serif; margin-bottom: 25px; font-size: 1.8rem;">📦
                 Grupos da Copa do Mundo 2026</h2>
             <div id="grid-todos-grupos">
-                <!-- O JavaScript vai construir as tabelas dos 12 grupos aqui dentro -->
             </div>
         </div>
 
-        <!-- BANNER PRINCIPAL (HERO) -->
         <section class="hero">
             <div class="hero-content">
                 <h1>COPA DO MUNDO<br><span class="highlight">FIFA 2026</span></h1>
@@ -66,24 +62,20 @@
                     <span class="play-icon">▶</span>
                 </button>
             </div>
-
         </section>
 
-        <!-- GRID DE CARDS DE RESUMO (WIDGETS SUPERIORES) -->
         <section class="widgets-grid" aria-label="Resumo do dia">
 
-            <!-- Card Próximo Jogo (Com o fundo verde claro da foto) -->
             <div class="card widget-proximo" id="proximo-jogo-container">
                 <span class="badge-title">
                     <img src="assets/img-cards/calendario.png" alt="" class="card-title-icon">
                     PRÓXIMO JOGO</span>
                 <div class="confronto-layout-novo">
-                    <!-- O JS vai carregar as imagens locais certas aqui, mas deixamos os caminhos corrigidos de exemplo -->
-                    <img src="assets/flags/brasil.png" class="flag-medium" alt="">
+                    <img src="assets/flags/brasil.png" class="flag-medium" alt="Brasil">
                     <span class="texto-confronto-novo">
                         Brasil x Haiti
                     </span>
-                    <img src="assets/flags/haiti.png" class="flag-medium" alt="">
+                    <img src="assets/flags/haiti.png" class="flag-medium" alt="Haiti">
                 </div>
                 <div class="info-rodape-card-novo">
                     <div class="info-partida-nova">
@@ -94,7 +86,6 @@
                 </div>
             </div>
 
-            <!-- Card Jogos de Hoje (Com marca d'água de campo de futebol) -->
             <div class="card widget-info card-jogos-hoje">
                 <span class="badge-title">
                     <img src="assets/img-cards/bola-futebol.png" alt="" class="card-title-icon">
@@ -103,13 +94,10 @@
                     <span class="numero-grande" id="qtd-jogos-hoje">6</span>
                     <p class="subtexto">partidas</p>
                 </div>
-
             </div>
 
-            <!-- Card Gols Marcados -->
             <div class="card widget-info card-gols-marcados">
                 <span class="badge-title">
-                    <!-- Trocado o emoji pela imagem oficial do ícone de trave/gols -->
                     <img src="assets/img-cards/gols-marcados.png" class="card-title-icon" alt="">
                     GOLS MARCADOS
                 </span>
@@ -120,30 +108,25 @@
                         <p class="subtexto">gols</p>
                     </div>
 
-                    <!-- O jogador azul, inteiro e espelhado fica aqui -->
                     <img src="" class="jogador-bg" alt="" aria-hidden="true">
                 </div>
             </div>
 
         </section>
 
-        <!-- SEÇÃO: JOGOS AO VIVO AGORA -->
         <section class="secao-jogos" aria-labelledby="titulo-ao-vivo">
             <div class="secao-header">
                 <h2>🟢 AO VIVO AGORA</h2>
                 <a href="#" class="ver-todos">Ver todos ➔</a>
             </div>
 
-            <!-- Grid onde o JavaScript injetará os cards dinâmicos vindos da API -->
             <div class="jogos-live-grid" id="jogos-container">
                 <div class="loading-placeholder">Buscando partidas em tempo real na API...</div>
             </div>
         </section>
 
-        <!-- SEÇÃO INFERIOR DE DUAS COLUNAS: CLASSIFICAÇÃO & NOTÍCIAS -->
         <section class="conteudo-duas-colunas" id="aba-classificacao">
 
-            <!-- Tabela de Classificação Arrumada -->
             <div class="coluna-classificacao">
                 <h2>CLASSIFICAÇÃO — GRUPO G</h2>
                 <div class="card table-container">
@@ -164,8 +147,7 @@
                                 <td style="text-align: center;" class="bold">1</td>
                                 <td>
                                     <div style="display: flex; align-items: center; gap: 10px;">
-                                        <!-- Aponta para a sua pasta de bandeiras locais -->
-                                        <img src="assets/bandeiras/br.png" class="flag-small" alt="Brasil">
+                                        <img src="assets/flags/brasil.png" class="flag-small" alt="Brasil">
                                         <span>Brasil</span>
                                     </div>
                                 </td>
@@ -179,8 +161,7 @@
                                 <td style="text-align: center;" class="bold">2</td>
                                 <td>
                                     <div style="display: flex; align-items: center; gap: 10px;">
-                                        <!-- Aponta para a sua pasta de bandeiras locais -->
-                                        <img src="assets/bandeiras/pt.png" class="flag-small" alt="Portugal">
+                                        <img src="assets/flags/portugal.png" class="flag-small" alt="Portugal">
                                         <span>Portugal</span>
                                     </div>
                                 </td>
@@ -195,7 +176,6 @@
                 </div>
             </div>
 
-            <!-- Bloco de Notícias Arrumado -->
             <div class="coluna-noticias">
                 <div class="secao-header">
                     <h2>ÚLTIMAS NOTÍCIAS</h2>
@@ -209,39 +189,31 @@
                     <div class="noticia-corpo">
                         <h3 style="font-size: 1rem; margin-bottom: 4px; color: #0F2942;">Brasil vence mais uma e se
                             classifica para as oitavas!</h3>
-                        <span class="tempo-noticia" style="font-size: 0.8rem; color: #94a3b8;">Há 15 minutos</span>
+                        <span class="tempo-noticia" style="font-size: 0.8rem; color: #94a3b8;">Há 15 minutes</span>
                     </div>
                 </div>
             </div>
 
         </section>
-        <!-- Fim da section conteudo-duas-colunas anterior -->
     </main>
 
-    <!-- =========================================================
-     RODAPÉ DA PÁGINA (FOOTER CORPORATIVO) 
-     ========================================================= -->
     <footer class="site-footer">
         <div class="footer-grid">
-
-            <!-- Coluna 1: Sobre o Projeto -->
             <div class="footer-col">
                 <h4>GOSSIP <span>CUP</span></h4>
                 <p>Portal acadêmico focado em cobertura, estatísticas e acompanhamento em tempo real da Copa do Mundo
                     FIFA 2026.</p>
             </div>
 
-            <!-- Coluna 2: Informações Acadêmicas -->
             <div class="footer-col">
                 <h5>Informações Acadêmicas</h5>
                 <ul>
-                    <li><strong>Matéria:</strong> Desenvolvimento Front-end </li>
+                    <li><strong>Matéria:</strong> Desenvolvimento Front-end</li>
                     <li><strong>Professor:</strong> Wagner Sabor</li>
                     <li><strong>Instituição:</strong> Curso Técnico de Desenvolvimento de Sistemas - SENAI</li>
                 </ul>
             </div>
 
-            <!-- Coluna 3: Grupo e Repositório -->
             <div class="footer-col">
                 <h5>Desenvolvimento</h5>
                 <p><strong>Grupo 3:</strong></p>
@@ -250,18 +222,13 @@
                     📦 Acessar Repositório Git ➔
                 </a>
             </div>
-
         </div>
 
-        <!-- Barra de Direitos Autorais Inferior -->
         <div class="footer-bottom">
             <p>© 2026 Gossip Cup. Todos os direitos reservados. Projeto sem fins lucrativos.</p>
         </div>
     </footer>
 
-
-
-    <!-- ARQUIVOS DE LÓGICA JAVASCRIPT (Mantidos perfeitamente isolados) -->
     <script src="js/api.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/app.js"></script>

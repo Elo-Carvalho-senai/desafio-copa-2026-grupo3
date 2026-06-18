@@ -1,0 +1,142 @@
+/* =========================================================
+   6. SEÇÃO DE JOGOS DINÂMICOS (GRID INFERIOR AO VIVO)
+   ========================================================= */
+.secao-jogos {
+    margin: 30px 10%;
+}
+
+.secao-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.ver-todos {
+    text-decoration: none;
+    color: var(--verde-claro, #6FAF8F);
+    font-weight: bold;
+}
+
+/* Grid principal que segura os 3 cards verticais */
+.jogos-live-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 10px 0 !important;
+}
+
+/* O container individual de cada mini-card */
+.card-jogo {
+    background: #ffffff !important;
+    border: 1px solid #eef5f1 !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    text-align: center;
+}
+
+/* Label do Grupo no topo */
+.grupo-label {
+    display: block !important;
+    font-size: 0.75rem !important;
+    color: #94a3b8 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 16px !important;
+    text-align: center !important;
+}
+
+/* Alinhamento horizontal do confronto (Time - Placar - Time) */
+.mini-grid-confronto {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 20px !important;
+    gap: 10px !important;
+}
+
+/* Bloco vertical de cada time (Bandeira em cima, Nome embaixo) */
+.mini-time-bloco {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+/* CONTROLE DAS BANDEIRAS DA INTERNET: Reduz o tamanho de forma limpa */
+.flag-mini-card {
+    width: 44px !important;
+    height: 30px !important;
+    border-radius: 4px !important;
+    object-fit: cover !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* Nome do país abaixo da bandeira */
+.mini-time-nome {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    width: 100% !important;
+}
+
+/* Bloco do Placar centralizado */
+.mini-placar-bloco {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 0 10px !important;
+}
+
+/* Números do placar */
+.mini-gols {
+    font-size: 1.6rem !important;
+    font-weight: 800 !important;
+    color: #0F2942 !important;
+}
+
+/* Hífen separador */
+.mini-separador {
+    color: #94a3b8 !important;
+    font-weight: bold !important;
+    font-size: 1.2rem !important;
+}
+
+/* Container do botão/badge de status no fundo */
+.status-container-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+/* Badges de Status estilizadas */
+.status-badge {
+    padding: 6px 16px !important;
+    border-radius: 20px !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.status-aovivo {
+    background-color: #69B37E !important;
+    color: #ffffff !important;
+}
+
+.status-encerrado {
+    background-color: #f1f5f9 !important;
+    color: #64748b !important;
+}
